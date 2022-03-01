@@ -12,8 +12,8 @@ const EmployeeList = () => {
     return(
         <EmployeeListWrapper>
             <h1>Current Employees</h1>
-            <Filters/>
-            <Table/>
+            {/*<Filters/>*/}
+            {/*<Table/>*/}
             <p onClick={handleClick}>Home</p>
         </EmployeeListWrapper>
     )
