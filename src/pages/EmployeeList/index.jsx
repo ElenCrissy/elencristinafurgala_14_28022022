@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import {useHistory} from "react-router";
 
-const EmployeeListWrapper = styled.div``
+const EmployeeListWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 
 const EmployeeList = () => {

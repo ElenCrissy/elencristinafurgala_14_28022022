@@ -4,7 +4,7 @@ import {reducer} from "./reducers";
 
 export const initialState = {
     // employees : localStorage.getItem("employees"),
-    employees : []
+    employees : "hello"
 }
 
 export const store = createStore(reducer, initialState, applyMiddleware(thunk))
