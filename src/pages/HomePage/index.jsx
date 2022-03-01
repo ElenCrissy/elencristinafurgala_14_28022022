@@ -12,8 +12,8 @@ const HomePageWrapper = styled.div`
 
 const HomePage = () => {
     const history = useHistory()
-    // const employeeList = useSelector(state => state.employees)
-    // console.log(employeeList)
+    const employeeList = useSelector(state => state.employees)
+    console.log(employeeList)
 
     const handleClick = () => {
         history.push('/employee-list')
@@ -21,8 +21,7 @@ const HomePage = () => {
     return(
         <HomePageWrapper>
             <h1>HRNET</h1>
-            {/* employees ? "View current employees"*/}
-            <a onClick={handleClick}>View current employees</a>
+            <p onClick={handleClick}>View current employees</p>
             <h2>Create Employee</h2>
             <NewEmployeeForm/>
         </HomePageWrapper>
