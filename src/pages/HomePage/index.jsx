@@ -12,6 +12,7 @@ const HomePage = () => {
     return(
         <HomePageWrapper>
             <h1>HRNET</h1>
+            // get employee state
             // employees ? "View current employees"
             <h2>Create Employee</h2>
             <NewEmployeeForm/>
