@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import {useState} from "react";
+import {useDispatch} from "react-redux";
 import {states} from "../../utils/states";
+import {createEmployee} from "../../store/actions";
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -16,6 +18,7 @@ const AddressWrapper = styled.fieldset``
 const SubmitButton = styled.button``
 
 const NewEmployeeForm = () => {
+    const dispatch = useDispatch()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState('')
@@ -41,9 +44,8 @@ const NewEmployeeForm = () => {
             },
             department : department
         }
-        // dispatch(createEmployee(userInput))
+        dispatch(createEmployee(userInput))
         // opens modal
-        // add link to employee list
     }
     return(
         <FormWrapper method="post" onSubmit={submitForm} novalidate>
