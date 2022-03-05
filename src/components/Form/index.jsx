@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {states} from "../../utils/states";
 import {createEmployee} from "../../store/actions";
+import Modal from "../Modal";
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -28,6 +29,7 @@ const NewEmployeeForm = () => {
     const [state, setState] = useState('')
     const [zipCode, setZipCode] = useState('')
     const [department, setDepartment] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -44,8 +46,7 @@ const NewEmployeeForm = () => {
             },
             department : department
         }
-        dispatch(createEmployee(userInput))
-        // opens modal
+        // dispatch(createEmployee(userInput))
     }
     return(
         <FormWrapper method="post" onSubmit={submitForm} novalidate>
@@ -123,7 +124,8 @@ const NewEmployeeForm = () => {
                     <option value={"Legal"}>Legal</option>
                 </select>
             </InputWrapper>
-            <SubmitButton type={"submit"}>Save</SubmitButton>
+            <SubmitButton type={"submit"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
+            <Modal open={isOpen} onClose={() => setIsOpen(false)}>Employee created !</Modal>
         </FormWrapper>
     )
 }
