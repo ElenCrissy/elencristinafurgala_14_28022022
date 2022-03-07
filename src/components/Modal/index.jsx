@@ -59,23 +59,10 @@ const ModalContent = styled.div`
 `
 
 const Modal = ({ children, open, onClose }) => {
-    // const modalRef = useRef(null);
-
     if(!open) return null
-    // useEffect(() => {
-    //     if (open) {
-    //         console.log("open")
-    //         modalRef.current.classList.add("visible");
-    //     }
-    //     // else {
-    //     //     modalRef.current.classList.remove("visible");
-    //     // }
-    //     if(!open) return null
-    // }, [open]);
-
+    
     return ReactDOM.createPortal(
         <ModalWrapper
-            // ref={modalRef}
             onClick={onClose}>
             <ModalContent onClick={(e) => e.stopPropagation()}>
                 {children}
