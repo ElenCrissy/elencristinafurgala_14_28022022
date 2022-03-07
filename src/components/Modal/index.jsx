@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -60,7 +59,7 @@ const ModalContent = styled.div`
 
 const Modal = ({ children, open, onClose }) => {
     if(!open) return null
-    
+
     return ReactDOM.createPortal(
         <ModalWrapper
             onClick={onClose}>

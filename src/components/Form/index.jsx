@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {states} from "../../utils/states";
 import {createEmployee} from "../../store/actions";
 import Modal from "../Modal";
+import {store} from "../../store";
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -47,8 +48,21 @@ const NewEmployeeForm = () => {
             },
             department : department
         }
+        let storedEmployees = localStorage.getItem("employees")
+        if(!storedEmployees) {
+            let employees = []
+            employees.push(userInput)
+            localStorage.setItem("employees", JSON.stringify(employees))
+        }
+        if(storedEmployees) {
+            const storedEmployeesArray = JSON.parse(localStorage.getItem("employees"))
+            storedEmployeesArray.push(userInput)
+            localStorage.setItem("employees", JSON.stringify(storedEmployeesArray))
+        }
+        // localStorage.clear()
         // dispatch(createEmployee(userInput))
     }
+
     return(
         <FormWrapper method="post" onSubmit={submitForm} novalidate>
             <InputWrapper>
