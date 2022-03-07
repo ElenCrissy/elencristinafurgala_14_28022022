@@ -44,12 +44,18 @@ const columns = [
     },
 ];
 
-const EmployeeTable = () => {
+const EmployeeTable = (props) => {
     //get employee list
     const data = JSON.parse(localStorage.getItem("employees"))
+    console.log(props)
     return (
         <DataTableWrapper>
-            <DataTable columns={columns} data={data} pagination/>
+            {
+                props.filter ?
+                    <DataTable columns={columns} data={props.filter} pagination/> :
+                    <DataTable columns={columns} data={data} pagination/>
+            }
+
         </DataTableWrapper>
     )
 }

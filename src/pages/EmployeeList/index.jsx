@@ -26,9 +26,24 @@ const EmployeeList = () => {
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value)
+        console.log(searchTerm)
         const storedEmployees = JSON.parse(localStorage.getItem("employees"))
         if(searchTerm) {
-            
+            const matchingEmployees = []
+            storedEmployees.forEach(storedEmployee => {
+                const firstName = storedEmployee.firstName
+                const lastName = storedEmployee.lastName
+                if(firstName.toLowerCase().includes(searchTerm.toLowerCase()) || lastName.toLowerCase().includes(searchTerm.toLowerCase())){
+                    matchingEmployees.push(storedEmployee)
+                    console.log(matchingEmployees)
+                    return matchingEmployees
+                }
+            })
+            setFilteredEmployees(matchingEmployees)
+        }
+        if(!searchTerm){
+            console.log(searchTerm)
+            setFilteredEmployees(undefined)
         }
     }
 
@@ -45,7 +60,7 @@ const EmployeeList = () => {
                     />
                 </div>
             </div>
-            <EmployeeTable filter={searchTerm}/>
+            <EmployeeTable filter={filteredEmployees}/>
             <p onClick={handleClick}>Home</p>
         </EmployeeListWrapper>
     )
