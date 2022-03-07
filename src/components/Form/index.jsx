@@ -7,6 +7,7 @@ import Modal from "../Modal";
 
 const FormWrapper = styled.form`
   width: 20%;
+  margin-bottom: 20px;
 `
 const InputWrapper = styled.div`
   margin-bottom: 20px;

@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import ReactDOM from "react-dom";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -17,7 +18,6 @@ const ModalWrapper = styled.div`
   box-sizing: border-box;
   background-color: rgba(0,0,0,0.75);
   text-align: center;
-  visibility: hidden;
   :before{
     content: "";
     display: inline-block;
@@ -25,19 +25,15 @@ const ModalWrapper = styled.div`
     vertical-align: middle;
     margin-right: -0.05em;
   }
-  #closeIcon{
-    height: 30px;
-    width: 30px;
-  }
-  .visible{
-    visibility: visible;
-  }
 `
 
 const ModalContent = styled.div`
   vertical-align: middle;
-  position: relative;
-  z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99;
   max-width: 500px;
   box-sizing: border-box;
   width: 90%;
@@ -46,33 +42,51 @@ const ModalContent = styled.div`
   border-radius: 8px;
   box-shadow: 0 0 10px #000;
   text-align: left;
+  #closeIcon{
+    position: absolute;
+    top: -12.5px;
+    right: -12.5px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-indent: -9999px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: white;
+    border-radius: 100%;
+  }
 `
 
-
 const Modal = ({ children, open, onClose }) => {
-    const modalRef = useRef(null);
-    useEffect(() => {
-        if (open) {
-            console.log("open")
-            modalRef.current.classList.add("visible");
-        }
-        // else {
-        //     modalRef.current.classList.remove("visible");
-        // }
-        if(!open) return null
-    }, [open]);
+    // const modalRef = useRef(null);
 
-    return (
-        <ModalWrapper ref={modalRef}>
-            <FontAwesomeIcon
-                icon={faCircleXmark}
-                onClick={onClose}
-                id={"closeIcon"}
-            />
-            <ModalContent>
+    if(!open) return null
+    // useEffect(() => {
+    //     if (open) {
+    //         console.log("open")
+    //         modalRef.current.classList.add("visible");
+    //     }
+    //     // else {
+    //     //     modalRef.current.classList.remove("visible");
+    //     // }
+    //     if(!open) return null
+    // }, [open]);
+
+    return ReactDOM.createPortal(
+        <ModalWrapper
+            // ref={modalRef}
+            onClick={onClose}>
+            <ModalContent onClick={(e) => e.stopPropagation()}>
                 {children}
+                <FontAwesomeIcon
+                    icon={faCircleXmark}
+                    onClick={onClose}
+                    id={"closeIcon"}
+                />
             </ModalContent>
-        </ModalWrapper>
+        </ModalWrapper>,
+        document.getElementById("portal")
     );
 };
 
