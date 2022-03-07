@@ -45,9 +45,7 @@ const columns = [
 ];
 
 const EmployeeTable = (props) => {
-    //get employee list
     const data = JSON.parse(localStorage.getItem("employees"))
-    console.log(props)
     return (
         <DataTableWrapper>
             {
