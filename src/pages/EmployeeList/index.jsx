@@ -12,13 +12,16 @@ const EmployeeListWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    input{
+      margin-left: 10px;
+    }
   }
 `
 
 const EmployeeList = () => {
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("")
-    const [filteredEmployees, setFilteredEmployees] = useState([])
+    const [filteredEmployees, setFilteredEmployees] = useState(undefined)
 
     const handleClick = () => {
         history.push('/')
@@ -41,7 +44,7 @@ const EmployeeList = () => {
             })
             setFilteredEmployees(matchingEmployees)
         }
-        if(!searchTerm){
+        if(!searchTerm || searchTerm.length < 2){
             console.log(searchTerm)
             setFilteredEmployees(undefined)
         }
