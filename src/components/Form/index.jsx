@@ -5,6 +5,8 @@ import {states} from "../../utils/states";
 import {createEmployee} from "../../store/actions";
 import Modal from "../Modal";
 import {store} from "../../store";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -24,8 +26,8 @@ const NewEmployeeForm = () => {
     const dispatch = useDispatch()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [birthDate, setBirthDate] = useState('')
-    const [startDate, setStartDate] = useState('')
+    const [birthDate, setBirthDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date())
     const [street, setStreet] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -81,16 +83,20 @@ const NewEmployeeForm = () => {
             </InputWrapper>
             <InputWrapper>
                 <label htmlFor={"birthDate"}>Date of birth</label>
-                <input type={"date"}
-                       id={"birthDate"}
-                       onChange={(e) => setBirthDate(e.target.value)}
+                <DatePicker
+                    selected={birthDate}
+                    onChange={(date) => setBirthDate(date)}
+                    isClearable
+                    showYearDropdown
                 />
             </InputWrapper>
             <InputWrapper>
                 <label htmlFor={"startDate"}>Start date</label>
-                <input type={"date"}
-                       id={"startDate"}
-                       onChange={(e) => setStartDate(e.target.value)}
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    isClearable
+                    showYearDropdown
                 />
             </InputWrapper>
             <AddressWrapper>

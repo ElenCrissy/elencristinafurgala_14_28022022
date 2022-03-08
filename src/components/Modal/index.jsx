@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
+import {useRef} from "react";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -59,16 +60,26 @@ const ModalContent = styled.div`
 
 const Modal = ({ children, open, onClose }) => {
     if(!open) return null
+    // if(open){
+    //     const modal = document.getElementById("modal")
+    //     console.log(modal)
+    //     modal.focus()
+    // }
 
     return ReactDOM.createPortal(
         <ModalWrapper
             onClick={onClose}>
-            <ModalContent onClick={(e) => e.stopPropagation()}>
+            <ModalContent
+                onClick={(e) => e.stopPropagation()}
+                id={'modal'}
+                tabindex={1}
+            >
                 {children}
                 <FontAwesomeIcon
                     icon={faCircleXmark}
                     onClick={onClose}
                     id={"closeIcon"}
+                    tabindex={2}
                 />
             </ModalContent>
         </ModalWrapper>,
