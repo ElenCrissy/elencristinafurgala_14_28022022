@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import {useState} from "react";
-import {useDispatch} from "react-redux";
 import {states} from "../../utils/states";
-import {createEmployee} from "../../store/actions";
 import Modal from "../Modal";
-import {store} from "../../store";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -23,7 +20,6 @@ const AddressWrapper = styled.fieldset``
 const SubmitButton = styled.button``
 
 const NewEmployeeForm = () => {
-    const dispatch = useDispatch()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState(new Date())
@@ -62,7 +58,6 @@ const NewEmployeeForm = () => {
             localStorage.setItem("employees", JSON.stringify(storedEmployeesArray))
         }
         // localStorage.clear()
-        // dispatch(createEmployee(userInput))
     }
 
     return(
