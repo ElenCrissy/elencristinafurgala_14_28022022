@@ -60,8 +60,15 @@ const NewEmployeeForm = () => {
         // localStorage.clear()
     }
 
+    // if(isOpen){
+    //     const root = document.getElementById("formWrapper")
+    //     root.setAttribute("aria-hidden", "true")
+    //     console.log(root)
+    //     document.body.style.overflow = 'hidden'
+    // }
+
     return(
-        <FormWrapper method="post" onSubmit={submitForm} novalidate>
+        <FormWrapper method="post" onSubmit={submitForm} novalidate id={"formWrapper"}>
             <InputWrapper>
                 <label htmlFor={"firstName"}>First name</label>
                 <input type={"text"}
@@ -141,7 +148,12 @@ const NewEmployeeForm = () => {
                 </select>
             </InputWrapper>
             <SubmitButton type={"submit"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
-            <Modal open={isOpen} onClose={() => setIsOpen(false)}>Employee created !</Modal>
+            <Modal open={isOpen}
+                   onClose={() => setIsOpen(false)}
+                   app={document.getElementById("root")}
+            >
+                Employee created !
+            </Modal>
         </FormWrapper>
     )
 }

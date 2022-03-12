@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import NewEmployeeForm from "../../components/Form";
-import {useSelector} from "react-redux";
 import {useHistory} from "react-router";
 
 const HomePageWrapper = styled.div`
