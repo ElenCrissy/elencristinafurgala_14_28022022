@@ -45,9 +45,7 @@ const columns = [
 ];
 
 const EmployeeTable = (props) => {
-    const data = JSON.parse(localStorage.getItem("employees"))
-    console.log(data)
-    if(data === null){
+    if(props.employees === null){
         return <p>No results</p>
     }
     return (
@@ -55,7 +53,7 @@ const EmployeeTable = (props) => {
             {
                 props.filter ?
                     <DataTable columns={columns} data={props.filter} pagination/> :
-                    <DataTable columns={columns} data={data} pagination/>
+                    <DataTable columns={columns} data={props.employees} pagination/>
             }
 
         </DataTableWrapper>

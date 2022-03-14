@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useHistory} from "react-router";
 import EmployeeTable from "../../components/DataTable";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const EmployeeListWrapper = styled.div`
   width: 100%;
@@ -22,6 +22,19 @@ const EmployeeList = () => {
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("")
     const [filteredEmployees, setFilteredEmployees] = useState(undefined)
+    const [employees, setEmployees] = useState([])
+
+    useEffect(() => {
+        const url = 'http://localhost:3000/employees'
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                setEmployees(data)
+            })
+            .catch(error => {
+                console.log(`Fetch problem: ${error}`)
+            });
+    }, [])
 
     const handleClick = () => {
         history.push('/')
@@ -60,7 +73,7 @@ const EmployeeList = () => {
                     />
                 </div>
             </div>
-            <EmployeeTable filter={filteredEmployees}/>
+            <EmployeeTable employees={employees} filter={filteredEmployees}/>
             <p onClick={handleClick}>Home</p>
         </EmployeeListWrapper>
     )

@@ -57,7 +57,7 @@ const NewEmployeeForm = () => {
             storedEmployeesArray.push(userInput)
             localStorage.setItem("employees", JSON.stringify(storedEmployeesArray))
         }
-        // localStorage.clear()
+        localStorage.clear()
     }
 
     // if(isOpen){

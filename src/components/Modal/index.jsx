@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import {useRef} from "react";
 
 const ModalWrapper = styled.div`
   position: fixed;
