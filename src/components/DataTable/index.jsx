@@ -28,19 +28,19 @@ const columns = [
     },
     {
         name: 'Street',
-        selector: row => row.street,
+        selector: row => row.address.street,
     },
     {
         name: 'City',
-        selector: row => row.city,
+        selector: row => row.address.city,
     },
     {
         name: 'State',
-        selector: row => row.state,
+        selector: row => row.address.state,
     },
     {
         name: 'Zip code',
-        selector: row => row.zipCode,
+        selector: row => row.address.zipCode,
     },
 ];
 

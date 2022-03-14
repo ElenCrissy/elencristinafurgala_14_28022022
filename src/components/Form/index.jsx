@@ -60,13 +60,6 @@ const NewEmployeeForm = () => {
         localStorage.clear()
     }
 
-    // if(isOpen){
-    //     const root = document.getElementById("formWrapper")
-    //     root.setAttribute("aria-hidden", "true")
-    //     console.log(root)
-    //     document.body.style.overflow = 'hidden'
-    // }
-
     return(
         <FormWrapper method="post" onSubmit={submitForm} novalidate id={"formWrapper"}>
             <InputWrapper>

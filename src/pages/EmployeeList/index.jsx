@@ -29,6 +29,7 @@ const EmployeeList = () => {
         fetch(url)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 setEmployees(data)
             })
             .catch(error => {
@@ -42,14 +43,13 @@ const EmployeeList = () => {
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value)
-        const storedEmployees = JSON.parse(localStorage.getItem("employees"))
         if(searchTerm) {
             const matchingEmployees = []
-            storedEmployees.forEach(storedEmployee => {
-                const firstName = storedEmployee.firstName.toLowerCase()
-                const lastName = storedEmployee.lastName.toLowerCase()
+            employees.forEach(employee => {
+                const firstName = employee.firstName.toLowerCase()
+                const lastName = employee.lastName.toLowerCase()
                 if(firstName.includes(searchTerm.toLowerCase()) || lastName.includes(searchTerm.toLowerCase())){
-                    matchingEmployees.push(storedEmployee)
+                    matchingEmployees.push(employee)
                     return matchingEmployees
                 }
             })
