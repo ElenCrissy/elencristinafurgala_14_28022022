@@ -1,0 +1,31 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "firstName": "Monica",
+      "lastName": "Geller",
+      "birthDate" : "29/05/1989",
+      "startDate" : "30/02/2010",
+      "address" : {
+        "street" : "147 W 84th street",
+        "city" : "New York City",
+        "state" : "New York",
+        "zipCode" : "98544"
+      },
+      "department" : "Marketing"
+    },
+    {
+      "id": 2,
+      "firstName": "Rachel",
+      "lastName": "Green",
+      "birthDate" : "29/05/1988",
+      "startDate" : "23/06/2012",
+      "address" : {
+        "street" : "145 W 85th street",
+        "city" : "New York City",
+        "state" : "New York",
+        "zipCode" : "98544"
+      },
+      "department" : "Sales"
+    }]
+}
