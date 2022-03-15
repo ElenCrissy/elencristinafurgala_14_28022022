@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useQuery} from "react-query";
 import fetchEmployees from "../../services/fetchEmployees"
 import Dropdown from "../../components/Dropdown";
+import {useEmployees} from "../../hooks/useEmployees";
 
 const EmployeeListWrapper = styled.div`
   width: 100%;
@@ -47,8 +48,7 @@ const EmployeeList = () => {
     //         });
     // }, [])
 
-    // with React Query
-    const { status, data, error } = useQuery("employees", fetchEmployees)
+    const { data } = useEmployees()
 
     const handleClick = () => {
         history.push('/')
@@ -73,8 +73,6 @@ const EmployeeList = () => {
         }
     }
 
-    console.log(status, data)
-
     const options = [
         { value : "10", label : "10" },
         { value : "25", label : "25" },
@@ -86,7 +84,7 @@ const EmployeeList = () => {
         <EmployeeListWrapper>
             <h1>Current Employees</h1>
             <div id={"filters"}>
-                <div class={"entries"}>Show <Dropdown options={options}/> entries</div>
+                <div className={"entries"}>Show <Dropdown options={options}/> entries</div>
                 <div id={"searchBar"}>
                     <label htmlFor={"search"}>Search</label>
                     <input type={"string"}

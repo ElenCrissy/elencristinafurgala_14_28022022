@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const EmployeeTableWrapper = styled.div`
-  //width: 80%;
+  width: 80%;
 `
 
 const columns = [
