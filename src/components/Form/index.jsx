@@ -4,6 +4,7 @@ import {states} from "../../utils/states";
 import Modal from "../Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Dropdown from "../Dropdown"
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -30,6 +31,31 @@ const NewEmployeeForm = () => {
     const [zipCode, setZipCode] = useState('')
     const [department, setDepartment] = useState('')
     const [isOpen, setIsOpen] = useState(false)
+
+    const departments = [
+        { value : "sales", label:"Sales" },
+        { value :"marketing", label:"Marketing" },
+        { value :"engineering", label:"Engineering" },
+        { value :"human resources", label:"Human Resources" },
+        { value :"legal", label:"Legal" },
+    ]
+
+    function renameProperty(obj, fromKey, toKey) {
+        obj[toKey] = obj[fromKey];
+        delete obj[fromKey];
+    }
+
+    states.forEach(state => {
+        for(let key in state){
+            if(key === "name") {
+                renameProperty(state, key, "label")
+            }
+            if(key === "abbreviation") {
+                renameProperty(state, key, "value")
+            }
+            return state
+        }
+    });
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -129,12 +155,10 @@ const NewEmployeeForm = () => {
                 </InputWrapper>
                 <InputWrapper>
                     <label htmlFor={"state"}>State</label>
-                    <select name={"department"}
-                            id={"state"}
-                        onChange={(e) => setState(e.target.value)}
-                    >
-                        <option value={"Alabama"}>Alabama</option>
-                    </select>
+                    <Dropdown name={"state"}
+                              id={"state"}
+                              onChange={(e) => setState(e.target.value)}
+                              options={states}/>
                 </InputWrapper>
                 <InputWrapper>
                     <label htmlFor={"zipCode"}>Zip Code</label>
@@ -146,16 +170,10 @@ const NewEmployeeForm = () => {
             </AddressWrapper>
             <InputWrapper>
                 <label htmlFor={"department"}>Department</label>
-                <select name={"department"}
-                        id={"department"}
-                        onChange={(e) => setDepartment(e.target.value)}
-                >
-                    <option value={"Sales"}>Sales</option>
-                    <option value={"Marketing"}>Marketing</option>
-                    <option value={"Engineering"}>Engineering</option>
-                    <option value={"Human Resources"}>Human Resources</option>
-                    <option value={"Legal"}>Legal</option>
-                </select>
+                <Dropdown name={"department"}
+                          id={"department"}
+                          onChange={(e) => setDepartment(e.target.value)}
+                          options={departments}/>
             </InputWrapper>
             <SubmitButton type={"submit"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
             <Modal open={isOpen}
