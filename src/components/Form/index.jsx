@@ -5,6 +5,7 @@ import Modal from "../Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "../Dropdown"
+import {useMutation} from "react-query";
 
 const FormWrapper = styled.form`
   width: 20%;
@@ -15,12 +16,18 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `
-
 const AddressWrapper = styled.fieldset``
-
 const SubmitButton = styled.button``
 
 const NewEmployeeForm = () => {
+    const departments = [
+        { value : "sales", label:"Sales" },
+        { value :"marketing", label:"Marketing" },
+        { value :"engineering", label:"Engineering" },
+        { value :"human resources", label:"Human Resources" },
+        { value :"legal", label:"Legal" },
+    ]
+
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [birthDate, setBirthDate] = useState(new Date())
@@ -32,15 +39,7 @@ const NewEmployeeForm = () => {
     const [department, setDepartment] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
-    const departments = [
-        { value : "sales", label:"Sales" },
-        { value :"marketing", label:"Marketing" },
-        { value :"engineering", label:"Engineering" },
-        { value :"human resources", label:"Human Resources" },
-        { value :"legal", label:"Legal" },
-    ]
-
-    function renameProperty(obj, fromKey, toKey) {
+    const renameProperty = (obj, fromKey, toKey) => {
         obj[toKey] = obj[fromKey];
         delete obj[fromKey];
     }
@@ -57,22 +56,7 @@ const NewEmployeeForm = () => {
         }
     });
 
-    const submitForm = (e) => {
-        e.preventDefault()
-        const userInput = {
-            firstName : firstName,
-            lastName : lastName,
-            birthDate : birthDate,
-            startDate : startDate,
-            address : {
-                street : street,
-                city : city,
-                state : state,
-                zipCode : zipCode
-            },
-            department : department
-        }
-
+    const addEmployee = (userInput) => {
         const url = 'http://localhost:3000/employees'
         const init = {
             method: "POST",
@@ -93,12 +77,63 @@ const NewEmployeeForm = () => {
                 "department" : userInput.department
             })
         }
-
         fetch(url, init)
             .then(response => response.json())
             .catch(error => {
                 console.log(`Fetch problem: ${error}`)
             });
+    }
+    const useAddEmployee = () => useMutation(addEmployee)
+    const { mutate } = useAddEmployee()
+
+    const submitForm = (e) => {
+        e.preventDefault()
+        const userInput = {
+            firstName : firstName,
+            lastName : lastName,
+            birthDate : birthDate,
+            startDate : startDate,
+            address : {
+                street : street,
+                city : city,
+                state : state,
+                zipCode : zipCode
+            },
+            department : department
+        }
+        if(userInput.firstName && userInput.lastName) {
+            // const url = 'http://localhost:3000/employees'
+            // const init = {
+            //     method: "POST",
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //         "firstName" : userInput.firstName,
+            //         "lastName" : userInput.lastName,
+            //         "birthDate" : userInput.birthDate,
+            //         "startDate" : userInput.startDate,
+            //         "address" : {
+            //             "street" : userInput.address.street,
+            //             "city" : userInput.address.city,
+            //             "state" : userInput.address.state,
+            //             "zipCode" : userInput.address.zipCode
+            //         },
+            //         "department" : userInput.department
+            //     })
+            // }
+            //
+            // fetch(url, init)
+            // .then(response => response.json())
+            // .catch(error => {
+            //     console.log(`Fetch problem: ${error}`)
+            // });
+
+            // with React Query
+            mutate(userInput)
+            setIsOpen(true)
+        }
+        return null
     }
 
     return(
@@ -175,7 +210,7 @@ const NewEmployeeForm = () => {
                           onChange={(e) => setDepartment(e.target.value)}
                           options={departments}/>
             </InputWrapper>
-            <SubmitButton type={"submit"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
+            <SubmitButton type={"submit"}>Save</SubmitButton>
             <Modal open={isOpen}
                    onClose={() => setIsOpen(false)}
                    app={document.getElementById("root")}

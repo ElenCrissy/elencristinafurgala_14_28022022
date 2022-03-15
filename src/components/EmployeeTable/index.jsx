@@ -1,7 +1,8 @@
 import DataTable from 'react-data-table-component';
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const DataTableWrapper = styled.div`
+const EmployeeTableWrapper = styled.div`
   //width: 80%;
 `
 
@@ -49,15 +50,32 @@ const EmployeeTable = (props) => {
         return <p>No results</p>
     }
     return (
-        <DataTableWrapper>
+        <EmployeeTableWrapper>
             {
                 props.filter ?
                     <DataTable columns={columns} data={props.filter} pagination/> :
                     <DataTable columns={columns} data={props.employees} pagination/>
             }
 
-        </DataTableWrapper>
+        </EmployeeTableWrapper>
     )
 }
 
 export default EmployeeTable;
+
+EmployeeTable.protoTypes = {
+    employees : PropTypes.arrayOf(PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        birthDate: PropTypes.string.isRequired,
+        startDate: PropTypes.string.isRequired,
+        department: PropTypes.string.isRequired,
+        address: PropTypes.shape({
+            street : PropTypes.string.isRequired,
+            city : PropTypes.string.isRequired,
+            state: PropTypes.string.isRequired,
+            zipCode: PropTypes.string.isRequired
+        }),
+        id : PropTypes.number.isRequired
+    }))
+}

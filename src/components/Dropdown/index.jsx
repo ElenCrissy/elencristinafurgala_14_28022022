@@ -1,10 +1,11 @@
 import Select from "react-select"
 import styled from "styled-components";
 
-const DropdownWrapper = styled.div``
+const DropdownWrapper = styled.div`
+  margin: 0 10px;
+`
 
 const Dropdown = ({options}) => {
-    console.log(options)
     return(
         <DropdownWrapper>
             <Select options={options}/>
