@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {states} from "../../utils/states";
 import Modal from "../Modal";
 import DatePicker from "react-datepicker";
@@ -46,18 +46,33 @@ const NewEmployeeForm = () => {
             },
             department : department
         }
-        let storedEmployees = localStorage.getItem("employees")
-        if(!storedEmployees) {
-            let employees = []
-            employees.push(userInput)
-            localStorage.setItem("employees", JSON.stringify(employees))
+
+        const url = 'http://localhost:3000/employees'
+        const init = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "firstName" : userInput.firstName,
+                "lastName" : userInput.lastName,
+                "birthDate" : userInput.birthDate,
+                "startDate" : userInput.startDate,
+                "address" : {
+                    "street" : userInput.address.street,
+                    "city" : userInput.address.city,
+                    "state" : userInput.address.state,
+                    "zipCode" : userInput.address.zipCode
+                },
+                "department" : userInput.department
+            })
         }
-        if(storedEmployees) {
-            const storedEmployeesArray = JSON.parse(localStorage.getItem("employees"))
-            storedEmployeesArray.push(userInput)
-            localStorage.setItem("employees", JSON.stringify(storedEmployeesArray))
-        }
-        localStorage.clear()
+
+        fetch(url, init)
+            .then(response => response.json())
+            .catch(error => {
+                console.log(`Fetch problem: ${error}`)
+            });
     }
 
     return(
@@ -67,6 +82,7 @@ const NewEmployeeForm = () => {
                 <input type={"text"}
                        id={"firstName"}
                        onChange={(e) => setFirstName(e.target.value)}
+                       required
                 />
             </InputWrapper>
             <InputWrapper>
@@ -74,6 +90,7 @@ const NewEmployeeForm = () => {
                 <input type={"text"}
                        id={"lastName"}
                        onChange={(e) => setLastName(e.target.value)}
+                       required
                 />
             </InputWrapper>
             <InputWrapper>

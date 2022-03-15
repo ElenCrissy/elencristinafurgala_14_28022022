@@ -11,12 +11,11 @@ const HomePageWrapper = styled.div`
 
 const HomePage = () => {
     const history = useHistory()
-    // const employeeList = useSelector(state => state.employees)
-    // console.log(employeeList)
 
     const handleClick = () => {
         history.push('/employee-list')
     }
+
     return(
         <HomePageWrapper>
             <h1>HRNET</h1>
