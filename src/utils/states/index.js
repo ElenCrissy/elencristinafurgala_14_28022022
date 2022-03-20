@@ -1,4 +1,4 @@
-export const states = [
+const states = [
     {
         "name": "Alabama",
         "abbreviation": "AL"
@@ -236,3 +236,20 @@ export const states = [
         "abbreviation": "WY"
     }
 ];
+
+const renameProperty = (obj, fromKey, toKey) => {
+    obj[toKey] = obj[fromKey];
+    delete obj[fromKey];
+}
+
+export const newStates = states.map(state => {
+    for(let key in state){
+        if(key === "name") {
+            renameProperty(state, key, "label")
+        }
+        if(key === "abbreviation") {
+            renameProperty(state, key, "value")
+        }
+        return state
+    }
+});

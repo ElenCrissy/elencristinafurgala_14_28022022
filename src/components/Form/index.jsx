@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useEffect, useState} from "react";
-import {states} from "../../utils/states";
+import {newStates, states} from "../../utils/states";
 import Modal from "../Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,23 +41,6 @@ const NewEmployeeForm = () => {
     const [zipCode, setZipCode] = useState('')
     const [department, setDepartment] = useState('')
     const [isOpen, setIsOpen] = useState(false)
-
-    const renameProperty = (obj, fromKey, toKey) => {
-        obj[toKey] = obj[fromKey];
-        delete obj[fromKey];
-    }
-
-    states.forEach(state => {
-        for(let key in state){
-            if(key === "name") {
-                renameProperty(state, key, "label")
-            }
-            if(key === "abbreviation") {
-                renameProperty(state, key, "value")
-            }
-            return state
-        }
-    });
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -169,7 +152,7 @@ const NewEmployeeForm = () => {
                         <Dropdown name={"state"}
                                   id={"state"}
                                   onChange={(e) => setState(e.target.value)}
-                                  options={states}/>
+                                  options={newStates}/>
                     </InputWrapper>
                     <InputWrapper>
                         <label htmlFor={"zipCode"}>Zip Code</label>
