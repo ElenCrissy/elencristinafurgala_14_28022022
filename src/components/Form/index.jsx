@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import {useEffect, useState} from "react";
-import {newStates, states} from "../../utils/states";
+import {useState} from "react";
+import {newStates} from "../../utils/states";
 import Modal from "../Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "../Dropdown"
-import {useMutation} from "react-query";
 import {useAddEmployee} from "../../hooks/useAddEmployee";
 import React from "react";
 
@@ -22,7 +21,6 @@ const SubmitButton = styled.button``
 
 const NewEmployeeForm = () => {
     const addEmployeeMutation = useAddEmployee()
-
     const departments = [
         { value : "sales", label:"Sales" },
         { value :"marketing", label:"Marketing" },
@@ -30,7 +28,6 @@ const NewEmployeeForm = () => {
         { value :"human resources", label:"Human Resources" },
         { value :"legal", label:"Legal" },
     ]
-
     const [info, setInfo] = useState({
         firstName : '',
         lastName: '',
@@ -63,44 +60,15 @@ const NewEmployeeForm = () => {
             department : info.department
         }
         if(userInput.firstName && userInput.lastName) {
-            // const url = 'http://localhost:3000/employees'
-            // const init = {
-            //     method: "POST",
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         "firstName" : userInput.firstName,
-            //         "lastName" : userInput.lastName,
-            //         "birthDate" : userInput.birthDate,
-            //         "startDate" : userInput.startDate,
-            //         "address" : {
-            //             "street" : userInput.address.street,
-            //             "city" : userInput.address.city,
-            //             "state" : userInput.address.state,
-            //             "zipCode" : userInput.address.zipCode
-            //         },
-            //         "department" : userInput.department
-            //     })
-            // }
-            //
-            // fetch(url, init)
-            // .then(response => response.json())
-            // .catch(error => {
-            //     console.log(`Fetch problem: ${error}`)
-            // });
-
             // with React Query
-            addEmployeeMutation.mutate(userInput, {
-                onSuccess: () => setIsOpen(true)
-            })
+            addEmployeeMutation.mutate(userInput)
         }
         return null
     }
 
     return(
         <React.Fragment>
-            <FormWrapper novalidate id={"formWrapper"}>
+            <FormWrapper onSubmit={submitForm} novalidate id={"formWrapper"}>
                 <InputWrapper>
                     <label htmlFor={"firstName"}>First name</label>
                     <input type={"text"}
@@ -216,7 +184,7 @@ const NewEmployeeForm = () => {
                               }}
                               options={departments}/>
                 </InputWrapper>
-                <SubmitButton type={"submit"} onClick={submitForm}>Save</SubmitButton>
+                <SubmitButton type={"button"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
             </FormWrapper>
             <Modal open={isOpen}
                    onClose={() => setIsOpen(false)}
