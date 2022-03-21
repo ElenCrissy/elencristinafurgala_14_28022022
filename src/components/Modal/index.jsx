@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import ReactDOM from "react-dom";
-import {useRef} from "react";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -59,7 +58,6 @@ const ModalContent = styled.div`
 `
 
 const Modal = ({ app, children, open, onClose }) => {
-    const hello = useRef(null)
     if(!open) {
         app.setAttribute("aria-hidden", "false")
         document.body.style.overflow = 'scroll'
@@ -83,7 +81,6 @@ const Modal = ({ app, children, open, onClose }) => {
             <ModalContent
                 onClick={(e) => e.stopPropagation()}
                 id={'modal'}
-                ref={hello}
             >
                 {children}
                 <FontAwesomeIcon

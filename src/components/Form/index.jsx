@@ -45,7 +45,6 @@ const NewEmployeeForm = () => {
 
     const submitForm = (e) => {
         e.preventDefault()
-        e.stopPropagation()
         const userInput = {
             firstName : info.firstName,
             lastName : info.lastName,
@@ -61,7 +60,9 @@ const NewEmployeeForm = () => {
         }
         if(userInput.firstName && userInput.lastName) {
             // with React Query
-            addEmployeeMutation.mutate(userInput)
+            addEmployeeMutation.mutate(userInput, {
+                onSuccess : setIsOpen(true)
+            })
         }
         return null
     }
@@ -184,7 +185,7 @@ const NewEmployeeForm = () => {
                               }}
                               options={departments}/>
                 </InputWrapper>
-                <SubmitButton type={"button"} onClick={() => setIsOpen(true)}>Save</SubmitButton>
+                <SubmitButton type={"submit"}>Save</SubmitButton>
             </FormWrapper>
             <Modal open={isOpen}
                    onClose={() => setIsOpen(false)}
