@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {useState} from "react";
 import {newStates} from "../../utils/states";
 import Modal from "../Modal";
+// import {Modal} from "@elencrissy/modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "../Dropdown"
@@ -61,10 +62,12 @@ const NewEmployeeForm = () => {
         if(userInput.firstName && userInput.lastName) {
             // with React Query
             addEmployeeMutation.mutate(userInput, {
-                onSuccess : setIsOpen(true)
+                onSuccess : () => {
+                    setIsOpen(true)
+                }
             })
         }
-        return null
+        // return null
     }
 
     return(

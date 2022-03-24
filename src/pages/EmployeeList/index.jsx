@@ -12,11 +12,11 @@ const EmployeeListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  #filters{
+  #searchBar{
     width: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     input{
       margin-left: 10px;
@@ -83,15 +83,12 @@ const EmployeeList = () => {
     return(
         <EmployeeListWrapper>
             <h1>Current Employees</h1>
-            <div id={"filters"}>
-                <div className={"entries"}>Show <Dropdown options={options}/> entries</div>
-                <div id={"searchBar"}>
-                    <label htmlFor={"search"}>Search</label>
-                    <input type={"string"}
-                           id={"search"}
-                           onChange={handleChange}
-                    />
-                </div>
+            <div id={"searchBar"}>
+                <label htmlFor={"search"}>Search</label>
+                <input type={"string"}
+                       id={"search"}
+                       onChange={handleChange}
+                />
             </div>
             <EmployeeTable employees={data} filter={filteredEmployees}/>
             <p onClick={handleClick}>Home</p>

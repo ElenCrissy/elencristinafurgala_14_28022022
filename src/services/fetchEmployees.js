@@ -1,5 +1,5 @@
 const fetchEmployees = () => {
-    const url = 'http://localhost:3000/employees'
+    const url = 'http://localhost:3001/employees'
     return fetch(url)
     .then(response => response.json())
     .catch(error => {

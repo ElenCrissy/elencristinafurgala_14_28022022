@@ -1,5 +1,5 @@
 export const addEmployee = (userInput) => {
-    const url = 'http://localhost:3000/employees'
+    const url = 'http://localhost:3001/employees'
     const init = {
         method: "POST",
         headers: {
