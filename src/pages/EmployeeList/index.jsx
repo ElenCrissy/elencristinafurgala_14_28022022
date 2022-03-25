@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import {useHistory} from "react-router";
 import EmployeeTable from "../../components/EmployeeTable";
-import {useEffect, useState} from "react";
-import {useQuery} from "react-query";
-import fetchEmployees from "../../services/fetchEmployees"
-import Dropdown from "../../components/Dropdown";
+import {useState} from "react";
 import {useEmployees} from "../../hooks/useEmployees";
 
 const EmployeeListWrapper = styled.div`
@@ -21,11 +18,6 @@ const EmployeeListWrapper = styled.div`
     input{
       margin-left: 10px;
     }
-    .entries{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
   }
 `
 
@@ -33,20 +25,6 @@ const EmployeeList = () => {
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("")
     const [filteredEmployees, setFilteredEmployees] = useState(undefined)
-    // const [employees, setEmployees] = useState([])
-    //
-    // useEffect(() => {
-    //     const url = 'http://localhost:3000/employees'
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             console.log(data)
-    //             setEmployees(data)
-    //         })
-    //         .catch(error => {
-    //             console.log(`Fetch problem: ${error}`)
-    //         });
-    // }, [])
 
     const { data } = useEmployees()
 

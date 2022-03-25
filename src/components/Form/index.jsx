@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import {useState} from "react";
 import {newStates} from "../../utils/states";
-import Modal from "../Modal";
-// import {Modal} from "@elencrissy/modal";
+// import Modal from "../Modal";
+import {Modal} from "@elencrissy/modal/src";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Dropdown from "../Dropdown"
