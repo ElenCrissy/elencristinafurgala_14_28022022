@@ -30,7 +30,6 @@ The employeeList page shows the list of the employees with all their info in a t
 
 ### 2.3 Launching the project
 
-- Clone it on your computer.
 - Run `npm install`
 - Run `npm run json-server` to connect to the back-end
 - The `npm start` command will allow you to run the project
