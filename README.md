@@ -20,6 +20,7 @@ The employeeList page shows the list of the employees with all their info in a t
 - React Router 5.2.0
 - Json server 0.17.0
 - Styled Components 5.3.3
+- React Query 3.34.16
 
 ### 2.2.1 Libraries
 
@@ -32,7 +33,7 @@ The employeeList page shows the list of the employees with all their info in a t
 - Clone it on your computer.
 - Run `npm install`
 - Run `npm run json-server` to connect to the back-end
-- The `npm start` command will allow you to run the project.
+- The `npm start` command will allow you to run the project
 
 ## 3. Use of the project
 
@@ -43,8 +44,4 @@ API calls are located in the following folder : `src/services`.
 ### 3.2 PropTypes
 
 PropTypes are located at the end of each component file when needed.
-
-### 3.2 JSDOC
-
-JSDOC will help you understand the role of each service.
 
