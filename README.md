@@ -24,6 +24,7 @@ The employeeList page shows the list of the employees with all their info in a t
 
 ### 2.2.1 Libraries
 
+- Modal : @elencrissy/modal 0.2.7
 - Dropdowns : @react-select 5.2.2
 - Date : @react-datepicker 4.7.0
 - Data table : @react-data-table-component 7.4.7
